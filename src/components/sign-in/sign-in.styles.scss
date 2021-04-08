@@ -1,0 +1,23 @@
+@mixin signin-items {
+    margin: auto;
+    // width: 30vw;
+    width: 380px;
+    border: .1px solid grey;
+    padding: 15px 15px;
+}
+.sign-in{
+    @include signin-items();
+    display: flex;
+    flex-direction: column;
+
+    .sign-in-buttons{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.register{
+    @include signin-items();
+    border: none;
+
+}
