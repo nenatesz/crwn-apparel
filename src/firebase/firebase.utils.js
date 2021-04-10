@@ -14,6 +14,36 @@ const config = {
     measurementId: "G-MFEXXR86DF"  
 }
 
+// this code gets a snapshot of the user data and creates a new user in the database (ie for new users). this is done using the auth details gotten from signing in with google.
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if(!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapshot = await userRef.get();
+
+    if(!snapshot.exists){
+        const {displayName, email} = userAuth;
+        const createdAt = new Date();
+
+        try{
+          await userRef.set({
+              displayName,
+              email,
+              createdAt,
+              ...additionalData
+          })
+        }catch(error){
+            console.log('error creating user', error.message);
+        }
+
+        
+    }
+
+    console.log(snapshot)
+    return userRef;
+}
+
 
 firebase.initializeApp(config);
 
