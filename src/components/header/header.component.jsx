@@ -27,7 +27,7 @@ const HeaderComponent = ({ currentUser }) => (
         
 );
 
-// state here gives avves to the root reducer
+// state here gives access to the root reducer
 const mapStateToProps = state => ({
     currentUser: state.user.currentUser
 })
