@@ -11,6 +11,12 @@
     right: 0;
     z-index: 5;
 
+    .alert{
+        font-size: 18px;
+        display: flex;
+        justify-content: center;  
+    }
+
     .cart-items {
         height: 240px;
         display: flex;

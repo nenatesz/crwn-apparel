@@ -39,6 +39,6 @@ const HeaderComponent = ({ currentUser, hidden }) => (
 // state here gives access to the root reducer
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    hidden: selectCartHidden
+    hidden: selectCartHidden,
 })
 export default connect(mapStateToProps)(HeaderComponent)
