@@ -1,4 +1,4 @@
-export const sections = [
+export const Sections = [
   {
     title: 'hats',
     imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
