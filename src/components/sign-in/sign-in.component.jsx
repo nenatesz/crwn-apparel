@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 import { auth, signInWIthGoogle } from '../../firebase/firebase.utils'
 
 
 import './sign-in.styles.scss';
+import { Link } from 'react-router-dom';
 
 class SignIn extends Component{
 
@@ -43,10 +43,7 @@ class SignIn extends Component{
         
     }
 
-    handleClick = () => {
-        this.props.history.push('/signup')
-    }
-
+    
      
     render(){
         return(
@@ -71,12 +68,11 @@ class SignIn extends Component{
                 
             </div>
             <div className='register'>
-                <h3>Don't have an account?</h3>
-                <CustomButton onClick={this.handleClick}>Sign Up</CustomButton>
+                <p>Don't have an account?<span><Link to='/signup'> Sign Up </Link></span></p>
             </div>  
             </div>
         )
     }
 }
 
-export default withRouter(SignIn);
+export default (SignIn);
