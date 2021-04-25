@@ -21,6 +21,6 @@ return (
 
 const mapStateToProps = createStructuredSelector({
     collections: selectCollectionPreview
-})
+});
 
 export default connect(mapStateToProps)(CollectionsOverview);
