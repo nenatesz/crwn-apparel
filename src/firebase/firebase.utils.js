@@ -68,12 +68,21 @@ export const convertColectionsSnapshotToMap = (collections) => {
             items
         };
     });
-    // we use the reduce function to covert the docs array to an object map that we need to store in our reducer.
+    // we use the reduce function to convert the docs array to an object map that we need to store in our reducer.
    return transformedCollection.reduce((accumulator, collection) => {
         accumulator[collection.title.toLowerCase()] = collection;
         return accumulator;
         }, {});
 };
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+       const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+           unsubscribe()
+           resolve(userAuth)
+       }, reject)
+    })
+}
 
 firebase.initializeApp(config);
 
@@ -82,10 +91,11 @@ export const firestore = firebase.firestore();
 
 // To setup google authentication utility
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt : 'select_account' });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt : 'select_account' });
 
-export const signInWIthGoogle = () => auth.signInWithPopup(provider);
+export const signInWIthGoogle = () => auth.signInWithPopup(googleProvider);
+
 
 export default firebase;
 
