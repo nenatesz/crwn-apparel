@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
@@ -17,38 +17,13 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
 
-class App extends Component{
+const App = ({currentUser, checkUserSession}) => {
 
-  // closing the open subscription to avoid memory leaks
-   unsubscribeFromAuth = null;
-
-  componentDidMount(){
-    const {checkUserSession} = this.props;
+  useEffect(() => {
     checkUserSession()
-    
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
-    //   if(userAuth){
-    //     const userRef = await createUserProfileDocument(userAuth);
-   
-    //      userRef.onSnapshot(snapShot => {
-    //         setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data()
-    //       })
-    //     }
-    //     )}
-    //     setCurrentUser(userAuth);
-    //     // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items }))
-    //     // );
-    //   })
-    };
+  }, [checkUserSession])
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth()
-  };
-
-  render(){
-    const { currentUser } = this.props
+  
     return (
       <div >
         <HeaderComponent />
@@ -62,8 +37,8 @@ class App extends Component{
         </Switch>
       </div>
     );
-  }
-}
+  };
+
 
  const mapStateToProps = createStructuredSelector({
    currentUser: selectCurrentUser,
@@ -75,3 +50,42 @@ class App extends Component{
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+
+
+
+
+
+
+
+
+
+
+// // closing the open subscription to avoid memory leaks
+// unsubscribeFromAuth = null;
+
+// componentDidMount(){
+//   const {checkUserSession} = this.props;
+//   checkUserSession()
+  
+//   // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+//   //   if(userAuth){
+//   //     const userRef = await createUserProfileDocument(userAuth);
+ 
+//   //      userRef.onSnapshot(snapShot => {
+//   //         setCurrentUser({
+//   //         id: snapShot.id,
+//   //         ...snapShot.data()
+//   //       })
+//   //     }
+//   //     )}
+//   //     setCurrentUser(userAuth);
+//   //     // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items }))
+//   //     // );
+//   //   })
+//   };
+
+// componentWillUnmount() {
+//   this.unsubscribeFromAuth()
+// };
